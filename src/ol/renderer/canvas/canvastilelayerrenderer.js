@@ -196,9 +196,11 @@ ol.renderer.canvas.TileLayer.prototype.prepareFrame = function(
 ol.renderer.canvas.TileLayer.prototype.forEachLayerAtPixel = function(
     pixel, frameState, callback, thisArg) {
   var canvas = this.context.canvas;
+  var pixelRatio = frameState.pixelRatio;
   var size = frameState.size;
-  canvas.width = size[0];
-  canvas.height = size[1];
+
+  canvas.width = size[0] * pixelRatio;
+  canvas.height = size[1] * pixelRatio;
   this.composeFrame(frameState, this.getLayer().getLayerState(), this.context);
 
   var imageData = this.context.getImageData(
